@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <title>Geometria</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="leaflet/leaflet.css">
+  <link rel="stylesheet" href="maps.css">
+  <script src="leaflet/leaflet.js"></script>
+
+</head>
+
+<body>
+  <div id="point_in_line"></div>
+  <br>
+  <div id="orthogonal_projection"></div>
+  <br>
+  <div id="nearest_point"></div>
+
+  <script src="geometry_functions.js"></script>
+  <script src="maps.js"></script>
+
+  <script>
+    var map = create_map('point_in_line', -22.2341, -45.9332);
+
+    var A = {lat: -22.223360, lng: -45.927036};
+    var B = {lat: -22.222498, lng: -45.923879};
+    L.polyline([[A.lat, A.lng], [B.lat, B.lng]], {color: 'red'}).addTo(map);
+
+    for (var d of [50, 100, 150, 200, 250]) {
+      var point = point_in_line(d, A, B);
+      L.marker(point).bindPopup(d+'').addTo(map);
+    }
+  </script>
+
+  <script>
+    var map = create_map('orthogonal_projection', -22.2341, -45.9332);
+    var A = {lat: -22.223360, lng: -45.927036};
+    var B = {lat: -22.222498, lng: -45.923879};
+    var E = {lat: -22.223533, lng: -45.925126};
+    var projection = orthogonal_projection(A, B, E);
+    L.polyline([[A.lat, A.lng], [B.lat, B.lng]], {color: 'red'}).addTo(map);
+    L.marker([E.lat, E.lng]).bindPopup('ref').addTo(map);
+    L.marker(projection).bindPopup('projection').addTo(map);
+  </script>
+
+  <script>
+    var map = create_map('nearest_point', -22.2341, -45.9332);
+    var A = {lat: -22.223360, lng: -45.927036};
+    var B = {lat: -22.222498, lng: -45.923879};
+    var E1 = {lat: -22.223533, lng: -45.925126};
+    var E2 = {lat: -22.221869, lng: -45.929184};
+    var E3 = {lat: -22.222127, lng: -45.918691};
+    var nearest1 = nearest_point(A, B, E1);
+    var nearest2 = nearest_point(A, B, E2);
+    var nearest3 = nearest_point(A, B, E3);
+    L.polyline([[A.lat, A.lng], [B.lat, B.lng]], {color: 'red'}).addTo(map);
+    L.marker([E1.lat, E1.lng]).bindPopup('ref 1').addTo(map);
+    L.marker([E2.lat, E2.lng]).bindPopup('ref 2').addTo(map);
+    L.marker([E3.lat, E3.lng]).bindPopup('ref 3').addTo(map);
+    L.marker(nearest1).bindPopup('nearest 1').addTo(map);
+    L.marker(nearest2).bindPopup('nearest 2').addTo(map);
+    L.marker(nearest3).bindPopup('nearest 3').addTo(map);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Testando SVG.js</title>
+    <link rel="stylesheet" href="sinotico.css" type="text/css">
+    <script src="svg.js/svg.min.js"></script>
+    <script src="sinotico.js"></script>
+    <script src="animacao.js"></script>
+</head>
+
+<body>
+    <div id="sinotico_div"></div>
+    <div id="animacao_div"></div>
+    <script>
+        var sinotico_div = document.getElementById('sinotico_div');
+        var segment_widths = [200, 300, 500, 200, 100, 100, 500, 150];
+        var sinotico = new Sinotico(sinotico_div, segment_widths);
+
+        var animacao_div = document.getElementById('animacao_div');
+        animar(animacao_div);
+    </script>
+</body>
+
+</html>

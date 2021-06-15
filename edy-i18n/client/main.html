@@ -1,0 +1,15 @@
+<head>
+  <title>edy-i18n</title>
+</head>
+
+<body>
+  {{> template_i18n}}
+</body>
+
+<template name="template_i18n">
+  {{_ "choose_language"}}: <br>
+  <select id="language">
+    <option value="en" selected="{{ english }}">English</option>
+    <option value="pt" selected="{{ portuguese }}">Português</option>
+  </select>
+</template>
